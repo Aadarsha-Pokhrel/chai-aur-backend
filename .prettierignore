@@ -1,0 +1,7 @@
+/.vscode
+/ndoe_modules
+./dist
+
+*.env
+.env
+.env.*
