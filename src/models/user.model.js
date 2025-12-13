@@ -48,15 +48,14 @@ const userSchema =new mongoose.Schema(
         }
     },
     {
-      timestanps:true
+      timestamps:true
     });
 
 
-userSchema.pre("save",async function (next){
+userSchema.pre("save",async function (){
     if(this.isModified("password")){
       this.password = await bcrypt.hash(this.password,10);
-    }
-    next();
+    };
 })
 
 userSchema.methods.isPasswordCorrect = async function (password){
@@ -84,7 +83,7 @@ userSchema.methods.generateRefreshToken = function(){
         },
         process.env.REFRESH_TOKEN_SECRET,
         {
-           expiresIn: process.env.REFRESH_TOKEN-EXPIRY
+           expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
     )   
 }
